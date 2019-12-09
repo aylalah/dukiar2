@@ -73,7 +73,7 @@ return [
 
         'users' => [
             'driver' => 'database',
-            'table' => 'admin',
+            'table' => 'admins',
         ],
     ],
 

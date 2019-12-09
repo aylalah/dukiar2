@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use Illuminate\Http\Request;
+use App\Role;
 
-class userLogController extends Controller
+class roleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,11 +20,9 @@ class userLogController extends Controller
      */
     public function index()
     {
-        $user = new User;
-        $users = $user::orderBy('id')->join('role', 'users.role','=','role.id')                                    
-                                    ->select('users.*','role.role_name')
-                                    ->paginate(8);
-                                     return view('admin.userLog')->with('data', $users);
+       
+        $role = Role::all();
+        return view('admin.role')->with('data', $role);
     }
 
     /**
@@ -40,7 +43,15 @@ class userLogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $addRole = new Role;
+        // $addRole -> role_name = $request -> input('r_name');
+        // $addRole -> role_desc = $request -> input('r_descp');
+        // $addRole -> role_status = $request -> input('r_status');
+
+        //         $settings->save();
+        //         if($settings->save()){
+        //             return redirect('/Role')->with('success', 'Saved Successfully');
+        //         }
     }
 
     /**
@@ -60,13 +71,10 @@ class userLogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        // $user = User::find($id);
-        // $role = Role::all();
-        // $cat = Category::all();
-        // return view('users.edit-People')-> with('data', $editpresenter)->with('dat', $role)->with('cdata', $cat);
- 
+        $role = Role::all();
+        return view('admin.role')->with('data', $role);
     }
 
     /**
@@ -78,7 +86,7 @@ class userLogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update = User::find($id); 
+        $update = Admin::find($id); 
 
         if($update -> status == 'active'){
             $update -> status = 'suspended';
@@ -86,20 +94,8 @@ class userLogController extends Controller
        
         $update->save();
         if($update->save()){
-            return redirect('/userLog')->with('success', 'Saved Successfully');
+            return redirect('/adminLog')->with('success', 'Saved Successfully');
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $delete = User::find($id);
-        $delete ->delete();
-       return redirect('/userLog');
+ 
     }
 }

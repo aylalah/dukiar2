@@ -11,10 +11,10 @@
 @endsection
 
 @section('breadcrumb')
-                            <h4 class="page-title">Admin Log</h4>
+                            <h4 class="page-title">Buyers Center</h4>
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>                                
-                                <li class="breadcrumb-item active">Admin Tables</li>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Buyers Dashboard</a></li>                                
+                                <li class="breadcrumb-item active">Centers Tables</li>
                             </ol>
 @endsection
 
@@ -26,7 +26,7 @@
                         <div class="card m-b-20">
                             <div class="card-body">
 
-                                <h4 class="mt-0 header-title">Admin Table</h4>
+                                <h4 class="mt-0 header-title">Buyer Centers Table</h4>
                                 <p class="text-muted m-b-30 font-14">The above tabe shows the table data of all categories of Admin.
                                 </p>
                                 <button type="button" class="btn btn-primary float-right waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg"><a style="color:beige;" >Add Admin</a></button><br><br>
@@ -39,34 +39,47 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             </div>
                                             <div class="modal-body">
-                                                <h4 class="mt-0 header-title">Set Up Admin</h4>
-                                <p class="text-muted m-b-30 font-14">These input are required to set up a new admin. The login information would be sent to his/her email.</p>
+                                                <h4 class="mt-0 header-title">Set Up Buyer Center</h4>
+                                <p class="text-muted m-b-30 font-14">These inputs are required to set up a new Buyer Location.</p>
 
-                                <form class="" method="POST" action="/add-Role">
+                                <form class="" method="POST" action="/add-center">
                                     {{ csrf_field() }}
+                                    
                                     <div class="form-group">
-                                        <label>Admin Role</label>                                        
-                                                <select class="custom-select" name="role_id">
-                                                    <option selected>Open this select menu</option>
-                                                    <option value="1">Admin</option>
-                                                    <option value="2">Operator</option>
-                                                    <option value="3">Payer</option>
-                                                    <option value="4">Logistics</option>
-                                                    <option value="5">Process</option>
-                                                    <option value="6">Equipment</option>
-                                                    <option value="7">C.F.O</option>
-                                                    <option value="8">C.O.O</option>
-                                                </select>
-                                            
-                                    </div>
-
-                                    <div class="form-group">
-                                            <label>E-Mail</label>
+                                            <label>Location Name</label>
                                             <div>
-                                                <input type="email" class="form-control" required name="email"
-                                                        parsley-type="email" placeholder="Enter a valid e-mail"/>
+                                                <input type="text" class="form-control" required name="name"  placeholder="Enter a Location Name"/>
                                             </div>
-                                        </div>                                  
+                                        </div>  
+
+                                        <div class="form-group">
+                                            <label>Location Address</label>
+                                            <div>
+                                                <textarea type="text" class="form-control" required name="address" placeholder="Enter a Location Address">
+                                                </textarea></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Location Contact</label>
+                                            <div>
+                                                <input type="text" class="form-control" required name="contact" placeholder="Enter a valid location Contact"/>
+                                            </div>
+                                        </div>  
+                                        <div class="form-group">
+                                            <label>Location Email</label>
+                                            <div>
+                                                <input type="email" class="form-control" required name="email" placeholder="Enter a valid location email"/>
+                                            </div>
+                                        </div>   
+                                       
+                                        <div class="form-group">
+                                            <label>Admin Role</label>                                        
+                                                    <select class="custom-select" name="admin_id">
+                                                        <option selected>Open this select menu</option>
+                                                        @foreach ($admi as $a)
+                                                        <option value="{{$a -> id}}">{{$a -> name}}</option>   
+                                                        @endforeach                                                    
+                                                    </select>                                                
+                                        </div>                                       
                                     
                                     <div class="form-group">
                                         <div>
@@ -78,6 +91,7 @@
                                             </button>
                                         </div>
                                     </div>
+                                   
                                 </form>
 
                                             </div>
@@ -88,10 +102,10 @@
                                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                         <tr>
-                                            <th>User ID</th>
-                                            <th>Image</th> 
-                                            <th>Name</th>
-                                            <th>Category</th>
+                                            <th>User ID</th>                                            
+                                            <th>Location Name</th>
+                                            <th>Address</th>
+                                            <th>Contact</th>
                                             <th>Status</th>
                                             <th>Action</th>                                                                               
                                         </tr>
@@ -102,9 +116,9 @@
                                         <tr>
                                             
                                             <td>{{$d->id}}</td>
-                                            <td><a href="{{ asset('/upload/user/'.$d->image_path)}}"><img class="img-fluid rounded-circle" style="width:50px; height:50px" src="{{ asset('/upload/users/'.$d->image_path)}}" /></a></td>
-                                            <td>{{$d-> name}}</td>
-                                            <td>{{$d->role_name}}</td>                                    
+                                            <td>{{$d-> location_name}}</td>
+                                            <td>{{$d->address}}</td>
+                                            <td>{{$d->contact_no}}</td>                                    
                                             @if ($d->status == "active")
                                             <td><span class="badge badge-pill badge-success">{{$d->status}}</span></td>
                                             @else
@@ -125,11 +139,11 @@
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                     </div>
                                                     <div class="modal-body">
-                                                            <p>You are about to change the admin status.</p>
+                                                            <p>You are about to change the buyer location status.</p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('updateAdmin', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Continue</a></button>
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('updateCenter', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Continue</a></button>
                                                             </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
@@ -143,11 +157,11 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                                <p>You are about to delete the admin account.</p>
+                                                                <p>You are about to delete the buyer location account.</p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('deleteAdmin', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Delete</a></button>
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('deleteCenter', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Delete</a></button>
                                                             </div>
                                                     </div><!-- /.modal-content -->
                                                 </div><!-- /.modal-dialog -->
@@ -161,44 +175,57 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form method="POST" class="" action="/edit-Admin">
+                                                            <form class="" method="POST" action="/edit-Center">
                                                                 {{ csrf_field() }}
-                                                                <div class="form-group">
-                                                                    <label>E-Mail</label>
-                                                                    <div>
-                                                                        <input type="text" class="form-control" value="{{$d-> name}}" required name="name"
-                                                                                parsley-type="text" placeholder="Enter a valid Name"/>
-                                                                        <input type="hidden" value="{{$d->id}}" name="id">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label>E-Mail</label>
-                                                                    <div>
-                                                                        <input type="email" value="{{$d->email}}" class="form-control" required name="email"
-                                                                                parsley-type="email" placeholder="Enter a valid e-mail"/>
-                                                                    </div>
-                                                                </div>                                                            
-                                                            
-                                                                <div class="form-group">
-                                                                    <label>Admin Role</label>                                        
-                                                                            <select class="custom-select" name="role_id">
-                                                                                <option selected>Open this select menu</option>
-                                                                                <option value="1">Admin</option>
-                                                                                <option value="2">Operator</option>
-                                                                                <option value="3">Payer</option>
-                                                                                <option value="4">Logistics</option>
-                                                                                <option value="5">Process</option>
-                                                                                <option value="6">Equipment</option>
-                                                                                <option value="7">C.F.O</option>
-                                                                                <option value="8">C.O.O</option>
-                                                                            </select>
-                                                                        
-                                                                </div>                           
                                                                 
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"><a style="color:beige;"><i class="fas fa-user-alt-slash"></i>Update</a></button>
+                                                                <div class="form-group">
+                                                                        <label>Location Name</label>
+                                                                        <div>
+                                                                            <input type="text" class="form-control" required name="name" value="{{$d-> location_name}}"  placeholder="Enter a Location Name"/>
+                                                                        <input type="hidden" value="{{$d->id}}" name="id">
+                                                                        </div>
+                                                                    </div>  
+                            
+                                                                    <div class="form-group">
+                                                                        <label>Location Address</label>
+                                                                        <div>
+                                                                            <textarea type="text" class="form-control" required name="address" placeholder="Enter a Location Address">{{$d->address}} </textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Location Contact</label>
+                                                                        <div>
+                                                                            <input type="text" class="form-control" required name="contact" value="{{$d->contact_no}}" placeholder="Enter a valid location Contact"/>
+                                                                        </div>
+                                                                    </div>  
+                                                                    <div class="form-group">
+                                                                        <label>Location Email</label>
+                                                                        <div>
+                                                                            <input type="email" class="form-control" required name="email" value="{{$d->contact_email}}" placeholder="Enter a valid location email"/>
+                                                                        </div>
+                                                                    </div>   
+                                                                   
+                                                                    <div class="form-group">
+                                                                        <label>Admin Role</label>                                        
+                                                                                <select class="custom-select" name="admin_id">
+                                                                                    <option selected>Open this select menu</option>
+                                                                                    @foreach ($admi as $a)
+                                                                                    <option value="{{$a -> id}}">{{$a -> name}}</option>   
+                                                                                    @endforeach                                                    
+                                                                                </select>                                                
+                                                                    </div>                                       
+                                                                
+                                                                <div class="form-group">
+                                                                    <div>
+                                                                        <button type="submit" class="btn btn-primary waves-effect waves-light">
+                                                                            Submit
+                                                                        </button>
+                                                                        <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                                                            Cancel
+                                                                        </button>
+                                                                    </div>
                                                                 </div>
+                                                               
                                                             </form>
                                                                 </div>                                                                
                                                     </div><!-- /.modal-content -->

@@ -154,48 +154,49 @@
                             </li>
 
                             <li class="has-submenu">
-                                <a href="#"><i class="ti-email"></i>Users</a>
+                                <a href="#"><i class="fas fa-user-tie"></i>People</a>
                                 <ul class="submenu">
                                     <li><a href="{{route('userLog')}}">Users Log</a></li>
                                     <li><a href="{{route('adminLog')}}">Admin Log</a></li>
-                                    <li><a href="{{route('adminLog')}}">Companies</a></li>
-                                    <li><a href="{{route('adminLog')}}">Op Location</a></li>
+                                    {{-- <li><a href="{{route('adminLog')}}">Companies</a></li>
+                                    <li><a href="{{route('adminLog')}}">Op Location</a></li> --}}
                                     <li><a href="email-compose"></a></li>
                                 </ul>
                             </li>
 
                             <li class="has-submenu">
-                                <a href="#"><i class="ti-email"></i>Transaction</a>
+                                <a href="#"><i class="fas fa-exchange-alt"></i>Transaction</a>
                                 <ul class="submenu">
-                                    <li><a href="email-inbox">All Transaction</a></li>
-                                    <li><a href="email-read">Box ID</a></li>
-                                    <li><a href="email-compose">XRF Operators</a></li>
+                                    <li><a href="{{route('transaction')}}">All Transaction</a></li>
+                                    <li><a href="{{route('box')}}">Box ID</a></li>
+                                    {{-- <li><a href="email-compose">XRF Operators</a></li>
                                     <li><a href="email-compose">Invoice</a></li>
                                     <li><a href="email-compose">Payment Approval</a></li>
                                     <li><a href="email-compose">Vault Reqeust</a></li>
-                                    <li><a href="email-compose">Repot</a></li>
+                                    <li><a href="email-compose">Repot</a></li> --}}
                                 </ul>
                             </li>
 
                             <li class="has-submenu">
-                                <a href="#"><i class="ti-email"></i>Movement</a>
+                                <a href="#"><i class="fas fa-truck"></i>Movement</a>
                                 <ul class="submenu">
-                                    <li><a href="email-inbox">Transfer Log Log </a></li>
+                                    {{-- <li><a href="email-inbox">Transfer Log </a></li>
                                     <li><a href="email-read">Logistics In</a></li>
                                     <li><a href="email-compose">Logistsic  Log</a></li>
                                     <li><a href="email-compose">Process tranf value</a></li>
                                     <li><a href="email-compose">process Log</a></li>
                                     <li><a href="email-compose">Logistsic in</a></li>
-                                    <li><a href="email-compose">History</a></li>
+                                    <li><a href="email-compose">History</a></li> --}}
                                 </ul>
                             </li>
 
                             <li class="has-submenu">
-                                <a href="#"><i class="ti-email"></i>Settings</a>
+                                <a href="#"><i class="fas fa-cogs"></i>Settings</a>
                                 <ul class="submenu">
-                                    <li><a href="email-inbox">Company Category</a></li>
-                                    <li><a href="email-read">Role</a></li>
-                                    <li><a href="email-read">Club Settings</a></li>
+                                    {{-- <li><a href="email-inbox">Company Category</a></li> --}}
+                                    <li><a href="{{route('role')}}">Role</a></li>
+                                    <li><a href="{{route('center')}}">B Center</a></li>
+                                    {{-- <li><a href="email-read">Club Settings</a></li> --}}
                                     {{-- <li><a href="email-compose">Processing</a></li> --}}
                                 </ul>
                             </li>
