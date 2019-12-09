@@ -156,9 +156,8 @@
                             <li class="has-submenu">
                                 <a href="#"><i class="ti-email"></i>Transaction</a>
                                 <ul class="submenu">
-                                    <li><a href="{{route('userLog')}}">Box ID</a></li>
-                                    <li><a href="{{route('adminLog')}}">Op Location</a></li>
-                                    <li><a href="email-compose">U</a></li>
+                                        <li><a href="{{route('transaction')}}">All Transaction</a></li>
+                                        <li><a href="{{route('box')}}">Box ID</a></li>
                                 </ul>
                             </li>
 

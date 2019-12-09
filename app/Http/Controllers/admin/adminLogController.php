@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Mail;
 use App\Admin;
 use App\Role;
+use App\Location;
 
 class adminLogController extends Controller
 {
@@ -23,11 +24,49 @@ class adminLogController extends Controller
      */
     public function index()
     {
+        switch(auth()->user()->role_id){
+            // case '1':  
+            // return view('admin.index');
+            // break;
+
+            case '2':  
+            return view('operator.index');
+            break;
+
+            case '3':  
+            return view('payer.index');
+            break;
+
+            case '4':  
+            return view('logistics.index');
+            break;
+
+            case '5':  
+            return view('proccess.index');
+            break;
+
+            case '6':  
+            return view('equip.index');
+            break;
+
+            case '7':  
+            return view('vault.index');
+            break;
+
+            // default: 
+            // return view('app.login');
+            // break;
+        }
+
+        $roles = Role::all();
+        $locations = Location::all();
+
         $admin = new Admin;
-        $admins = $admin::orderBy('id')->join('role', 'admins.role_id','=','role.id')                                    
-                                    ->select('admins.*','role.role_name')
+        $admins = $admin::orderBy('id')->join('role', 'admins.role_id','=','role.id')
+                                    ->join('location', 'admins.location_id','=','location.id')                                    
+                                    ->select('admins.*','role.role_name', 'location.location_name')
                                     ->paginate(8);
-                                    return view('admin.adminLog')->with('data', $admins);
+                                    return view('admin.adminLog', ['data'=> $admins, 'role'=> $roles, 'location'=> $locations]);
        
     }
 
@@ -53,6 +92,7 @@ class adminLogController extends Controller
         $word = "aztm".date('sdmy');
         $cot= str_shuffle(substr($word, 0, 8));
         $addRole -> role_id = $request -> input('role_id');
+        $addRole -> location_id = $request -> input('location');
         $addRole -> email = $request -> input('email');
         $addRole -> password = $cot;
             
@@ -111,15 +151,18 @@ class adminLogController extends Controller
         $updateadmin = Admin::find($request-> input('id'));
         $updateadmin -> name = $request-> input('name');
         $updateadmin -> email = $request-> input('email');
-        $updateadmin -> role_id = $request -> input('role_id');        
+        $updateadmin -> role_id = $request -> input('role_id'); 
+        $updateadmin -> location_id = $request -> input('location');        
        
         $updateadmin->save();
         if($updateadmin->save()){
-            $data= array('data1'=> 'response 1 and so on');
-            Mail::send('mail', $data, function($message){
-                $message->to($request-> input('email'), "name")->subject("this is the subject");
-                $message->from('seder@testmail.com','no reply');
-            } );
+
+            // $data= array('data1'=> 'response 1 and so on', 'data2'=>"respons");
+            // Mail::send('mail', $data, function($message){
+            //     $message->to($request-> input('email'), "name")->subject("this is the subject");
+            //     $message->from('seder@testmail.com','no reply');
+            // } );
+            
             return redirect('/adminLog')->with('success', 'Saved Successfully');
         }
  

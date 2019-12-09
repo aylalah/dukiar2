@@ -46,16 +46,19 @@
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label>Admin Role</label>                                        
-                                                <select class="custom-select" name="role_id">
-                                                    <option selected>Open this select menu</option>
-                                                    <option value="1">Admin</option>
-                                                    <option value="2">Operator</option>
-                                                    <option value="3">Payer</option>
-                                                    <option value="4">Logistics</option>
-                                                    <option value="5">Process</option>
-                                                    <option value="6">Equipment</option>
-                                                    <option value="7">C.F.O</option>
-                                                    <option value="8">C.O.O</option>
+                                        <select class="custom-select" name="role_id">                                                   
+                                            @foreach ($role as $r)
+                                                <option value="{{$r->id}}">{{$r->role_name}}</option>
+                                            @endforeach 
+                                            
+                                        </select>                                            
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Location</label>                                        
+                                                <select class="custom-select" name="location">
+                                                    @foreach ($location as $l)
+                                                        <option value="{{$l->id}}">{{$l->location_name}}</option>
+                                                    @endforeach
                                                 </select>
                                             
                                     </div>
@@ -91,7 +94,9 @@
                                             <th>User ID</th>
                                             <th>Image</th> 
                                             <th>Name</th>
-                                            <th>Category</th>
+                                            <th>Email</th>
+                                            <th>Position</th>
+                                            <th>Location</th>
                                             <th>Status</th>
                                             <th>Action</th>                                                                               
                                         </tr>
@@ -99,12 +104,13 @@
                                         <tbody>
                                                 
                                                 @foreach ($data as $d)
-                                        <tr>
-                                            
+                                        <tr>                                            
                                             <td>{{$d->id}}</td>
-                                            <td><a href="{{ asset('/upload/user/'.$d->image_path)}}"><img class="img-fluid rounded-circle" style="width:50px; height:50px" src="{{ asset('/upload/users/'.$d->image_path)}}" /></a></td>
+                                            <td><a href="{{url('/')}}/assets/images/users/{{$d->image_path}}"><img class="img-fluid rounded-circle" style="width:50px; height:50px" src="{{url('/')}}/assets/images/users/{{$d->image_path}}" /></a></td>
                                             <td>{{$d-> name}}</td>
-                                            <td>{{$d->role_name}}</td>                                    
+                                            <td>{{$d-> email}}</td>
+                                            <td>{{$d->role_name}}</td>
+                                            <td>{{$d->location_name}}</td>                                    
                                             @if ($d->status == "active")
                                             <td><span class="badge badge-pill badge-success">{{$d->status}}</span></td>
                                             @else
@@ -164,9 +170,9 @@
                                                             <form method="POST" class="" action="/edit-Admin">
                                                                 {{ csrf_field() }}
                                                                 <div class="form-group">
-                                                                    <label>E-Mail</label>
+                                                                    <label>Name</label>
                                                                     <div>
-                                                                        <input type="text" class="form-control" value="{{$d-> name}}" required name="name"
+                                                                        <input type="text" class="form-control" value="{{$d-> name}}" name="name"
                                                                                 parsley-type="text" placeholder="Enter a valid Name"/>
                                                                         <input type="hidden" value="{{$d->id}}" name="id">
                                                                     </div>
@@ -177,24 +183,25 @@
                                                                         <input type="email" value="{{$d->email}}" class="form-control" required name="email"
                                                                                 parsley-type="email" placeholder="Enter a valid e-mail"/>
                                                                     </div>
-                                                                </div>                                                            
-                                                            
+                                                                </div>
                                                                 <div class="form-group">
                                                                     <label>Admin Role</label>                                        
-                                                                            <select class="custom-select" name="role_id">
-                                                                                <option selected>Open this select menu</option>
-                                                                                <option value="1">Admin</option>
-                                                                                <option value="2">Operator</option>
-                                                                                <option value="3">Payer</option>
-                                                                                <option value="4">Logistics</option>
-                                                                                <option value="5">Process</option>
-                                                                                <option value="6">Equipment</option>
-                                                                                <option value="7">C.F.O</option>
-                                                                                <option value="8">C.O.O</option>
+                                                                    <select class="custom-select" name="role_id">                                                   
+                                                                        @foreach ($role as $r)
+                                                                            <option value="{{$r->id}}">{{$r->role_name}}</option>
+                                                                        @endforeach 
+                                                                        
+                                                                    </select>                                            
+                                                                </div> 
+                                                                <div class="form-group">
+                                                                    <label>Location</label>                                        
+                                                                            <select class="custom-select" name="location">
+                                                                                @foreach ($location as $l)
+                                                                                    <option value="{{$l->id}}">{{$l->location_name}}</option>
+                                                                                @endforeach
                                                                             </select>
                                                                         
-                                                                </div>                           
-                                                                
+                                                                </div>                                                            
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
                                                                     <button type="submit" class="btn btn-primary waves-effect waves-light"><a style="color:beige;"><i class="fas fa-user-alt-slash"></i>Update</a></button>

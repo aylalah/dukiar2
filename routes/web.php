@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -56,9 +56,9 @@ Route::get('/operator', 'buyer\buyerController@index')->name('buyer');
 
     //New box
     Route::get('/box', 'buyer\boxController@index')->name('box');
-    Route::get('/update-box/{id}', 'buyer\boxController@update')->name('updatebox');
-    Route::POST('/edit-box', 'buyer\boxController@updatecenter')->name('editbox');
-    Route::get('/delete-box/{id}', 'buyer\boxController@destroy')->name('deletebox');
+    Route::get('/update-box/{id}', 'buyer\boxController@update')->name('updateBox');
+    Route::POST('/edit-box', 'buyer\boxController@updatebox')->name('editBox');
+    Route::get('/delete-box/{id}', 'buyer\boxController@destroy')->name('deleteBox');
     Route::POST('/add-box', 'buyer\boxController@store')->name('addbox');
 
 //Payer

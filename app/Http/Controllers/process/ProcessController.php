@@ -43,7 +43,7 @@ class ProcessController extends Controller
             break;
 
             case '5':  
-            return view('proccess.index');
+            return view('process.index');
             break;
 
             case '6':  
@@ -58,6 +58,6 @@ class ProcessController extends Controller
             return view('app.login');
             break;
         }
-        return view('admin.index');
+        return view('process.index');
     }
 }

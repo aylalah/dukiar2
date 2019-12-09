@@ -22,14 +22,46 @@ class boxController extends Controller
      */
     public function index()
     {
+
+        switch(auth()->user()->role_id){
+            // case '1':  
+            // return view('admin.index');
+            // break;
+
+            // case '2':  
+            // return view('operator.index');
+            // break;
+
+            case '3':  
+            return view('payer.index');
+            break;
+
+            case '4':  
+            return view('logistics.index');
+            break;
+
+            case '5':  
+            return view('proccess.index');
+            break;
+
+            case '6':  
+            return view('equip.index');
+            break;
+
+            case '7':  
+            return view('vault.index');
+            break;
+
+            // default: 
+            // return view('app.login');
+            // break;
+        }
        
-        $admin = Admin::orderBy('id')->select('admins.*')
-                                    ->where('admins.role_id', '=', '2')
-                                    ->paginate();
+        $admin = Location::orderBy('id')->select('location.*')->paginate();
         $box = new Box;
-        $boxs = $box::orderBy('id')                        
-                                    ->select('box.*')
-                                    ->paginate(8);
+        $boxs = $box::orderBy('id') ->join('location', 'box.location_id','=','location.id')                       
+                                    ->select('box.*', 'location_name')
+                                    ->paginate();
                                     return view('operator.box', ['data'=> $boxs, 'admi'=> $admin]);
        
     }
@@ -52,14 +84,12 @@ class boxController extends Controller
      */
     public function store(Request $request)
     {
-        $addbox = new Location;
-        // $word = "aztm".date('sdmy');
-        // $cot= str_shuffle(substr($word, 0, 8));
-        $addbox -> location_name = $request -> input('name');
-        $addbox -> address = $request -> input('address');
-        $addbox -> contact_no = $request -> input('contact');
-        $addbox -> contact_email = $request -> input('email');
-        $addbox -> admin_id = $request -> input('admin_id');
+        $addbox = new Box;
+        $word = "dclnorbx".$request -> input('name').date('sdmy');
+        $cot= str_shuffle(substr($word, 0, 18));
+        $addbox -> box_id = $cot;
+        $addbox -> location_id = $request -> input('location_id');
+        $addbox -> description = 'This Box ID belogs to'.' '.$request -> input('location_name').' '.'location';      
             
                 $addbox->save();
                 if($addbox->save()){
@@ -98,7 +128,7 @@ class boxController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update = Location::find($id); 
+        $update = Box::find($id); 
 
         if($update -> status == 'active'){
             $update -> status = 'suspended';
@@ -113,12 +143,10 @@ class boxController extends Controller
 
     public function updatebox(Request $request)
     {
-        $updatebox = Location::find($request-> input('id'));
-        $updatebox -> location_name = $request -> input('name');
-        $updatebox -> address = $request -> input('address');
-        $updatebox -> contact_no = $request -> input('contact');
-        $updatebox -> contact_email = $request -> input('email');
-        $updatebox -> admin_id = $request -> input('admin_id');       
+        $updatebox = Box::find($request-> input('id'));
+        $updatebox -> box_id =  $request -> input('box_id');
+        $updatebox -> location_id = $request -> input('location_id');
+        $updatebox -> description = $request -> input('box_info');     
        
         $updatebox->save();
         if($updatebox->save()){

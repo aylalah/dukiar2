@@ -19,6 +19,7 @@
 @endsection
 
 @section('content')
+
             <div class="container-fluid">
                   
                 <div class="row">
@@ -42,51 +43,35 @@
                                                 <h4 class="mt-0 header-title">Set Up Box</h4>
                                 <p class="text-muted m-b-30 font-14">These inputs are required to set up a new box for each location Location.</p>
 
-                                <form class="" method="POST" action="/add-center">
+                                <form class="" method="POST" action="/add-box">
                                     {{ csrf_field() }}
                                     
                                     <div class="form-group">
-                                            <label>Location Name</label>
-                                            <div>
-                                                <input type="text" class="form-control" required name="name"  placeholder="Enter a Location Name"/>
-                                            </div>
-                                        </div>  
+                                        <label>Buyer Location</label>                                        
+                                        {{-- <select class="custom-select" name="location_id">
+                                            <option selected>Open this select menu</option>
+                                            @foreach ($admi as $a)
+                                            <option value="{{$a -> id}}">{{$a -> location_name}}</option>                                              
+                                            @endforeach 
+                                                                                           
+                                        </select>  
+                                                                                       --}}
+                                         @foreach ($admi as $a)
+                                        @if ( Auth::user()->location_id == $a -> id)
 
-                                        <div class="form-group">
-                                            <label>Location Address</label>
-                                            <div>
-                                                <textarea type="text" class="form-control" required name="address" placeholder="Enter a Location Address">
-                                                </textarea></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Location Contact</label>
-                                            <div>
-                                                <input type="text" class="form-control" required name="contact" placeholder="Enter a valid location Contact"/>
-                                            </div>
-                                        </div>  
-                                        <div class="form-group">
-                                            <label>Location Email</label>
-                                            <div>
-                                                <input type="email" class="form-control" required name="email" placeholder="Enter a valid location email"/>
-                                            </div>
-                                        </div>   
-                                       
-                                        <div class="form-group">
-                                            <label>Admin Role</label>                                        
-                                                    <select class="custom-select" name="admin_id">
-                                                        <option selected>Open this select menu</option>
-                                                        @foreach ($admi as $a)
-                                                        <option value="{{$a -> id}}">{{$a -> name}}</option>   
-                                                        @endforeach                                                    
-                                                    </select>                                                
-                                        </div>                                       
+                                        <input type="text" disabled class="form-control" value="{{$a -> location_name}}" name="location_name"
+                                        parsley-type="text" placeholder="Enter a valid Name"/>
+                                            <input type="hidden" value="{{Auth::user()->location_id}}" name="location_id">
+                                        @endif
+                                        @endforeach                                         
+                                    </div>                                                
                                     
                                     <div class="form-group">
                                         <div>
                                             <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                                Submit
+                                                Generate ID
                                             </button>
-                                            <button type="reset" class="btn btn-secondary waves-effect m-l-5">
+                                            <button type="reset" class="btn btn-secondary waves-effect m-l-5" data-dismiss="modal" aria-hidden="true">
                                                 Cancel
                                             </button>
                                         </div>
@@ -117,16 +102,17 @@
                                         <tr>
                                             
                                             <td>{{$d->id}}</td>
-                                            <td>{{$d-> box_id}}</td>
+                                            <td style="font-size:15px;"><i class="mdi mdi-checkbox-blank-circle text-success"></i> {{$d-> box_id}}</td>
                                             <td>{{$d->description}}</td>
-                                            <td>{{$d->location_id}}</td>                                                                             
+                                            <td>{{$d->location_name}}</td>                                                                             
                                             @if ($d->status == "active")
                                             <td><span class="badge badge-pill badge-success">{{$d->status}}</span></td>
                                             @else
                                             <td><span class="badge badge-pill badge-danger">{{$d->status}}</span></td>
                                             @endif
                                             <td>{{$d->created_at}}</td>  
-                                            <td><button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-update-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-alt-slash"></i></a></button>
+                                            <td>
+                                                {{-- <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-update-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-alt-slash"></i></a></button> --}}
                                                 <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-edit-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-edit"></i></a></button> 
                                                 <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-delete-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-times"></i></a></button>    
                                                 
@@ -145,7 +131,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('updateCenter', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Continue</a></button>
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('updateBox', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Continue</a></button>
                                                             </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
@@ -163,7 +149,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('deleteCenter', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Delete</a></button>
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('deleteBox', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Delete</a></button>
                                                             </div>
                                                     </div><!-- /.modal-content -->
                                                 </div><!-- /.modal-dialog -->
@@ -177,46 +163,25 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form class="" method="POST" action="/edit-Center">
+                                                            <form class="" method="POST" action="/edit-box">
                                                                 {{ csrf_field() }}
                                                                 
                                                                 <div class="form-group">
-                                                                        <label>Location Name</label>
+                                                                        <label>Box Id</label>
                                                                         <div>
-                                                                            <input type="text" class="form-control" required name="name" value="{{$d-> location_name}}"  placeholder="Enter a Location Name"/>
+                                                                            <input type="text" class="form-control" disabled value="{{$d-> box_id}}"/>
                                                                         <input type="hidden" value="{{$d->id}}" name="id">
+                                                                        <input type="hidden" name="box_id" value="{{$d-> box_id}}">
+                                                                        <input type="hidden" value="{{Auth::user()->location_id}}" name="location_id">
                                                                         </div>
                                                                     </div>  
                             
                                                                     <div class="form-group">
-                                                                        <label>Location Address</label>
+                                                                        <label>Box Description</label>
                                                                         <div>
-                                                                            <textarea type="text" class="form-control" required name="address" placeholder="Enter a Location Address">{{$d->address}} </textarea>
+                                                                            <textarea type="text" class="form-control" required name="box_info" placeholder="Enter box description">{{$d->description}}</textarea>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Location Contact</label>
-                                                                        <div>
-                                                                            <input type="text" class="form-control" required name="contact" value="{{$d->contact_no}}" placeholder="Enter a valid location Contact"/>
-                                                                        </div>
-                                                                    </div>  
-                                                                    <div class="form-group">
-                                                                        <label>Location Email</label>
-                                                                        <div>
-                                                                            <input type="email" class="form-control" required name="email" value="{{$d->contact_email}}" placeholder="Enter a valid location email"/>
-                                                                        </div>
-                                                                    </div>   
-                                                                   
-                                                                    <div class="form-group">
-                                                                        <label>Admin Role</label>                                        
-                                                                                <select class="custom-select" name="admin_id">
-                                                                                    <option selected>Open this select menu</option>
-                                                                                    @foreach ($admi as $a)
-                                                                                    <option value="{{$a -> id}}">{{$a -> name}}</option>   
-                                                                                    @endforeach                                                    
-                                                                                </select>                                                
-                                                                    </div>                                       
-                                                                
+                                                                    </div>                                                                    
                                                                 <div class="form-group">
                                                                     <div>
                                                                         <button type="submit" class="btn btn-primary waves-effect waves-light">

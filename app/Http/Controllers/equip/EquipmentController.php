@@ -43,7 +43,7 @@ class EquipmentController extends Controller
             break;
 
             case '5':  
-            return view('proccess.index');
+            return view('process.index');
             break;
 
             case '6':  
