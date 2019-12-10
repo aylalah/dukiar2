@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -23,7 +23,7 @@ Auth::routes();
     Route::get('/update-Admin/{id}', 'admin\adminLogController@update')->name('updateAdmin');
     Route::POST('/edit-Admin', 'admin\adminLogController@updateadmin')->name('editAdmin');
     Route::get('/delete-Admin/{id}', 'admin\adminLogController@destroy')->name('deleteAdmin');
-    Route::POST('/add-Role', 'admin\adminLogController@store')->name('adminRole');
+    Route::POST('/add-admin', 'admin\adminLogController@store')->name('addAdmin');
 
     //Buying Center
     Route::get('/center', 'admin\centerController@index')->name('center');

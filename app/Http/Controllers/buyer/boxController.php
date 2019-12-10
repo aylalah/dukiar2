@@ -56,11 +56,12 @@ class boxController extends Controller
             // return view('app.login');
             // break;
         }
-       
+        $location = auth()->user()->location_id;
         $admin = Location::orderBy('id')->select('location.*')->paginate();
         $box = new Box;
         $boxs = $box::orderBy('id') ->join('location', 'box.location_id','=','location.id')                       
                                     ->select('box.*', 'location_name')
+                                    ->where('box.location_id', '=',  $location)
                                     ->paginate();
                                     return view('operator.box', ['data'=> $boxs, 'admi'=> $admin]);
        

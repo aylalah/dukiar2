@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Mail;
 use App\Admin;
 use App\Role;
@@ -42,7 +43,7 @@ class adminLogController extends Controller
             break;
 
             case '5':  
-            return view('proccess.index');
+            return view('process.index');
             break;
 
             case '6':  
@@ -65,7 +66,7 @@ class adminLogController extends Controller
         $admins = $admin::orderBy('id')->join('role', 'admins.role_id','=','role.id')
                                     ->join('location', 'admins.location_id','=','location.id')                                    
                                     ->select('admins.*','role.role_name', 'location.location_name')
-                                    ->paginate(8);
+                                    ->paginate();
                                     return view('admin.adminLog', ['data'=> $admins, 'role'=> $roles, 'location'=> $locations]);
        
     }
@@ -88,16 +89,27 @@ class adminLogController extends Controller
      */
     public function store(Request $request)
     {
+        $email= $request -> input('email');
         $addRole = new Admin;
         $word = "aztm".date('sdmy');
         $cot= str_shuffle(substr($word, 0, 8));
         $addRole -> role_id = $request -> input('role_id');
         $addRole -> location_id = $request -> input('location');
         $addRole -> email = $request -> input('email');
-        $addRole -> password = $cot;
-            
+        $addRole -> password = Hash::make($cot);  
+        
+        $GLOBALS['email']=$request -> input('email');
+        
+        $data = array('cu'=>"hello", 'site'=>'hi', 'recipient'=>'jo','order'=>'yii','price'=>'allo');
+        Mail::send('password', $data, function($message) {
+           $message->to($GLOBALS['email'], 'new user')->subject('New account created for u');
+           $message->from('ayoade0369@gmail.com','noreply');
+        });
+
                 $addRole->save();
-                if($addRole->save()){
+                if($addRole->save()){                    
+
+                    //  echo $cot;
                     return redirect('/adminLog')->with('success', 'Saved Successfully');
                 }
     }

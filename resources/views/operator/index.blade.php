@@ -1,4 +1,4 @@
-@extends('layouts.buyerMaster')
+@extends('layouts.master')
 
 @section('css')
 <link rel="stylesheet" href="{{ URL::asset('assets/plugins/morris/morris.css')}}">
@@ -13,7 +13,7 @@
                             </ol>
 @endsection
 
-@section('bcontent')
+@section('content')
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-3 col-md-6">

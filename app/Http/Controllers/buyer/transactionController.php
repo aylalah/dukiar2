@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Admin;
 use App\Role;
 use App\Location;
+use App\Transaction;
 
 class transactionController extends Controller
 {
@@ -58,9 +59,9 @@ class transactionController extends Controller
         $admin = Admin::orderBy('id')->select('admins.*')
                                     ->where('admins.role_id', '=', '2')
                                     ->paginate();
-        $transaction = new Location;
+        $transaction = new Transaction;
         $transactions = $transaction::orderBy('id')                        
-                                    ->select('location.*')
+                                    ->select('transaction.*')
                                     ->paginate(8);
                                     return view('operator.transaction', ['data'=> $transactions, 'admi'=> $admin]);
        

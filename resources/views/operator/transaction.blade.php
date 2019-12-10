@@ -102,10 +102,11 @@
                                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                         <tr>
-                                            <th>User ID</th>                                            
-                                            <th>Location Name</th>
-                                            <th>Address</th>
-                                            <th>Contact</th>
+                                            <th>S/N</th>
+                                            <th>Transaction ID</th>
+                                            <th>User</th>                                                                                       
+                                            <th>Box ID</th>                                            
+                                            <th>Location</th>
                                             <th>Status</th>
                                             <th>Action</th>                                                                               
                                         </tr>
@@ -116,9 +117,10 @@
                                         <tr>
                                             
                                             <td>{{$d->id}}</td>
-                                            <td>{{$d-> location_name}}</td>
-                                            <td>{{$d->address}}</td>
-                                            <td>{{$d->contact_no}}</td>                                    
+                                            <td>{{$d->transaction_id}}</td>
+                                            <td>{{$d->firstname}} {{$d->lastname}}</td>
+                                            <td>{{$d->box_id}}</td>  
+                                            <td>{{$d->location}}</td>                                    
                                             @if ($d->status == "active")
                                             <td><span class="badge badge-pill badge-success">{{$d->status}}</span></td>
                                             @else

@@ -42,7 +42,7 @@
                                                 <h4 class="mt-0 header-title">Set Up Admin</h4>
                                 <p class="text-muted m-b-30 font-14">These input are required to set up a new admin. The login information would be sent to his/her email.</p>
 
-                                <form class="" method="POST" action="/add-Role">
+                                <form class="" method="POST" action="/add-admin">
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <label>Admin Role</label>                                        
