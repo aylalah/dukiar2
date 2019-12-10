@@ -49,9 +49,10 @@ Route::get('/operator', 'buyer\buyerController@index')->name('buyer');
 
     //New Transaction
     Route::get('/transaction', 'buyer\transactionController@index')->name('transaction');
-    Route::get('/update-transaction/{id}', 'buyer\transactionController@update')->name('updatetransaction');
+    Route::get('/update-transaction/{id}', 'buyer\transactionController@update')->name('updateTrans');
+    Route::get('/edit-transaction/{id}', 'buyer\transactionController@edit')->name('editTrans');
     Route::POST('/edit-transaction', 'buyer\transactionController@updatecenter')->name('edittransaction');
-    Route::get('/delete-transaction/{id}', 'buyer\transactionController@destroy')->name('deletetransaction');
+    Route::get('/delete-transaction/{id}', 'buyer\transactionController@destroy')->name('deleteTrans');
     Route::POST('/add-transaction', 'buyer\transactionController@store')->name('addtransaction');
 
     //New box

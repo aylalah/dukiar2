@@ -60,8 +60,9 @@ class transactionController extends Controller
                                     ->where('admins.role_id', '=', '2')
                                     ->paginate();
         $transaction = new Transaction;
-        $transactions = $transaction::orderBy('id')                        
-                                    ->select('transaction.*')
+        $transactions = $transaction::orderBy('id')->join('users', 'transaction.user_id','=','users.id')  
+                                    ->join('box', 'transaction.box_id','=','box.box_id')                         
+                                    ->select('transaction.*','users.first_name', 'users.last_name','users.user_id','users.email','users.phoneno','box.box_id','box.location_id','box.status AS box_status')
                                     ->paginate(8);
                                     return view('operator.transaction', ['data'=> $transactions, 'admi'=> $admin]);
        
@@ -119,7 +120,23 @@ class transactionController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $editpresenter = Presenters::find($id);
+        // $role = Role::all();
+        // $cat = Category::all();
+        // return view('users.edit-People')-> with('data', $editpresenter)->with('dat', $role)->with('cdata', $cat);
+
+        $admin = Admin::orderBy('id')->select('admins.*')
+                                    ->where('admins.role_id', '=', '2')
+                                    ->paginate();
+        $transaction = new Transaction;
+        $transactions = $transaction::orderBy('id')->join('users', 'transaction.user_id','=','users.id')  
+                                    ->join('box', 'transaction.box_id','=','box.box_id')
+                                    ->join('location', 'box.location_id','=','location.id')                         
+                                    ->select('transaction.*','users.first_name', 'users.last_name', 'location.location_name','users.user_id','users.email','users.phoneno','box.box_id','box.location_id','box.status AS box_status')
+                                    ->where('transaction.id', '=', $id)
+                                    ->get();
+                                    // echo $transactions;
+                                    return view('operator.xrf', ['data'=> $transactions, 'admi'=> $admin]);
     }
 
     /**

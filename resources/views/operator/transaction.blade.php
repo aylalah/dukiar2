@@ -117,17 +117,17 @@
                                         <tr>
                                             
                                             <td>{{$d->id}}</td>
-                                            <td>{{$d->transaction_id}}</td>
+                                            <td><a href=""><i class="mdi mdi-checkbox-blank-circle text-success"></i> {{$d->transaction_id}}</a></td>
                                             <td>{{$d->firstname}} {{$d->lastname}}</td>
                                             <td>{{$d->box_id}}</td>  
                                             <td>{{$d->location}}</td>                                    
-                                            @if ($d->status == "active")
+                                            @if ($d->status == "open")
                                             <td><span class="badge badge-pill badge-success">{{$d->status}}</span></td>
                                             @else
                                             <td><span class="badge badge-pill badge-danger">{{$d->status}}</span></td>
                                             @endif
                                             <td><button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-update-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-alt-slash"></i></a></button>
-                                                <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-edit-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-edit"></i></a></button> 
+                                                <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-edit-{{$d->id}}"> <a href="{{ route('editTrans', $d->id)}}" style="color:beige;"><i class="fas fa-user-edit"></i></a></button> 
                                                 <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-delete-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-times"></i></a></button>    
                                                 
                                             </td>
@@ -145,7 +145,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('updateCenter', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Continue</a></button>
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('updateTrans', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Continue</a></button>
                                                             </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
@@ -163,13 +163,13 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('deleteCenter', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Delete</a></button>
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('deleteTrans', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Delete</a></button>
                                                             </div>
                                                     </div><!-- /.modal-content -->
                                                 </div><!-- /.modal-dialog -->
                                             </div><!-- /.modal -->
 
-                                            <div class="modal fade bs-example-modal-edit-{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                            {{-- <div class="modal fade bs-example-modal-edit-{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -232,7 +232,7 @@
                                                                 </div>                                                                
                                                     </div><!-- /.modal-content -->
                                                 </div><!-- /.modal-dialog -->
-                                            </div><!-- /.modal -->
+                                            </div><!-- /.modal --> --}}
                                         @endforeach 
                                         </tbody>
                                 </table>                               
