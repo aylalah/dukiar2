@@ -8,28 +8,34 @@
         <title>Dukia</title>             
         @endif
         @if (Auth::user()->role_id == '2')
-        <title>Operator</title>             
+        <title>COO Admin</title>             
         @endif
         @if (Auth::user()->role_id == '3')
-        <title>Payer</title>             
+        <title>CFO</title>             
         @endif
         @if (Auth::user()->role_id == '4')
-        <title>Logistics</title>             
+        <title>Operator</title>             
         @endif
         @if (Auth::user()->role_id == '5')
-        <title>Proccessing</title>             
+        <title>Vault</title>             
         @endif
         @if (Auth::user()->role_id == '6')
-        <title>Equipment</title>             
+        <title>payer</title>             
         @endif
         @if (Auth::user()->role_id == '7')
-        <title>C.F.O</title>             
+        <title>Logistics</title>             
         @endif
         @if (Auth::user()->role_id == '8')
-        <title>C.O.O</title>             
+        <title>Processing</title>             
         @endif
         @if (Auth::user()->role_id == '9')
-        <title>Dukia - Vault</title>             
+        <title>Equipment</title>             
+        @endif  
+        @if (Auth::user()->role_id == '11')
+        <title>Loan Admin</title>             
+        @endif        
+        @if (Auth::user()->role_id == '10')
+        <title>Lab Admin</title>             
         @endif
         
         @include('layouts.head')

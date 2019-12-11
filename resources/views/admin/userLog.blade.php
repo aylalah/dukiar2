@@ -11,10 +11,10 @@
 @endsection
 
 @section('breadcrumb')
-                            <h4 class="page-title">Users Log</h4>
+                            <h4 class="page-title">Dukia Members</h4>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>                                
-                                <li class="breadcrumb-item active">Users Tables</li>
+                                <li class="breadcrumb-item active">Dukia Members Tables</li>
                             </ol>
 @endsection
 
@@ -49,22 +49,18 @@
                                         <td>{{$d->id}}</td>
                                         <td><a href="{{ asset($d->image_path)}}"><img class="img-fluid rounded-circle" style="width:50px; height:50px" src="{{ asset('/'.$d->image_path)}}" /></a></td>
                                         <td>{{$d->first_name}} {{$d->last_name}}</td>
-                                        <td>{{$d->role_name}}</td>                                    
+                                        <td>{{$d->role}}</td>                                    
                                        @if ($d->status == "active")
                                        <td><span class="badge badge-pill badge-success">{{$d->status}}</span></td>
                                        @else
                                        <td><span class="badge badge-pill badge-danger">{{$d->status}}</span></td>
                                        @endif
-                                        <td><button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-update"> <a style="color:beige;"><i class="fas fa-user-alt-slash"></i></a></button>
-                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-delete"> <a style="color:beige;" ><i class="fas fa-user-minus"></i></a></button>    
+                                        <td><button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-update-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-alt-slash"></i></a></button>
+                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-delete-{{$d->id}}"> <a style="color:beige;" ><i class="fas fa-user-minus"></i></a></button>    
                                            
                                         </td>
-                                    </tr>                                    
-                                    @endforeach 
-                                    </tbody>
-                                </table>
-
-                                <div class="modal fade bs-example-modal-update" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    </tr>  
+                                    <div class="modal fade bs-example-modal-update-{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -82,7 +78,7 @@
                                         </div><!-- /.modal-dialog -->
                                     </div><!-- /.modal -->
 
-                                    <div class="modal fade bs-example-modal-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal fade bs-example-modal-delete-{{$d->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -98,8 +94,10 @@
                                                         </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
-                                        </div><!-- /.modal -->
-
+                                        </div><!-- /.modal -->                                  
+                                    @endforeach 
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div> <!-- end col -->

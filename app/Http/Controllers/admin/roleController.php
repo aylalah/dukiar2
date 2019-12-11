@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Role;
+use App\Admin;
 
 class roleController extends Controller
 {
@@ -21,36 +22,40 @@ class roleController extends Controller
     public function index()
     {
         switch(auth()->user()->role_id){
-            // case '1':  
-            // return view('admin.index');
+            // case '1': return view('admin.index');
             // break;
 
-            case '2':  
-            return view('operator.index');
+            case '2': return view('admin.index');
             break;
 
-            case '3':  
-            return view('payer.index');
+            case '3': return view('admin.index');
             break;
 
-            case '4':  
-            return view('logistics.index');
+            case '4': return view('operator.index');
             break;
 
-            case '5':  
-            return view('proccess.index');
+            case '5': return view('vault.index');
             break;
 
-            case '6':  
-            return view('equip.index');
+            case '6': return view('payer.index');
+            break;            
+
+            case '7': return view('logistics.index');
             break;
 
-            case '7':  
-            return view('vault.index');
+            case '8': return view('process.index');
             break;
 
-            // default: 
-            // return view('app.login');
+            case '9': return view('equip.index');
+            break;  
+
+            case '10': return view('lab.index');
+            break; 
+            
+            case '11': return view('loan.index');
+            break;  
+
+            // default: return view('welcome');
             // break;
         }
        
@@ -119,7 +124,7 @@ class roleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update = Admin::find($id); 
+        $update = Role::find($id); 
 
         if($update -> status == 'active'){
             $update -> status = 'suspended';

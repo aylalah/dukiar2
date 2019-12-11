@@ -23,36 +23,40 @@ class transactionController extends Controller
     public function index()
     {
         switch(auth()->user()->role_id){
-            // case '1':  
-            // return view('admin.index');
+            // case '1': return view('admin.index');
             // break;
 
-            // case '2':  
-            // return view('operator.index');
+            // case '2': return view('admin.index');
             // break;
 
-            case '3':  
-            return view('payer.index');
+            case '3': return view('admin.index');
             break;
 
-            case '4':  
-            return view('logistics.index');
+            // case '4': return view('operator.index');
+            // break;
+
+            case '5': return view('vault.index');
             break;
 
-            case '5':  
-            return view('proccess.index');
+            case '6': return view('payer.index');
+            break;            
+
+            case '7': return view('logistics.index');
             break;
 
-            case '6':  
-            return view('equip.index');
+            case '8': return view('process.index');
             break;
 
-            case '7':  
-            return view('vault.index');
-            break;
+            case '9': return view('equip.index');
+            break;  
 
-            // default: 
-            // return view('app.login');
+            case '10': return view('lab.index');
+            break; 
+            
+            case '11': return view('loan.index');
+            break;  
+
+            // default: return view('welcome');
             // break;
         }
        
@@ -161,18 +165,22 @@ class transactionController extends Controller
  
     }
 
-    public function updatetransaction(Request $request)
+    public function updatexrf(Request $request )
     {
-        $updatetransaction = Location::find($request-> input('id'));
-        $updatetransaction -> location_name = $request -> input('name');
-        $updatetransaction -> address = $request -> input('address');
-        $updatetransaction -> contact_no = $request -> input('contact');
-        $updatetransaction -> contact_email = $request -> input('email');
-        $updatetransaction -> admin_id = $request -> input('admin_id');       
-       
-        $updatetransaction->save();
-        if($updatetransaction->save()){
+        $updatexrf = Transaction::find($request-> input('id'));
+        // $trans=  $updatexrf -> transaction_id;
+        $updatexrf -> xrf_value = $request -> input('xrfvalue');
+        $updatexrf -> karate = $request -> input('karate');
+        $updatexrf -> status = 'cost';
+        $updatexrf -> cost = '2000000';
+        // $updatetransaction -> contact_email = $request -> input('email');
+        // $updatetransaction -> admin_id = $request -> input('admin_id');       
+    //    echo $trans;
+        $updatexrf->save();
+        if( $updatexrf->save()){
             return redirect('/transaction')->with('success', 'Saved Successfully');
+        }else {
+            return 'non';
         }
  
     }

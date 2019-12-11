@@ -157,8 +157,8 @@
                             <li class="has-submenu">
                                     <a href="#"><i class="fas fa-user-tie"></i>People</a>
                                     <ul class="submenu">
-                                        <li><a href="{{route('userLog')}}">Users Log</a></li>
-                                        <li><a href="{{route('adminLog')}}">Admin Log</a></li>
+                                        <li><a href="{{route('userLog')}}">Dukia Members</a></li>
+                                        <li><a href="{{route('adminLog')}}">Users</a></li>
                                         {{-- <li><a href="{{route('adminLog')}}">Companies</a></li>
                                         <li><a href="{{route('adminLog')}}">Op Location</a></li> --}}
                                         <li><a href="email-compose"></a></li>
@@ -216,7 +216,7 @@
                                 </li>                                
                             @endif
 
-                            @if (Auth::user()->role_id == '2')
+                            @if (Auth::user()->role_id == '4')
                             <li class="has-submenu">
                                     
                                 <li class="has-submenu">
@@ -234,7 +234,25 @@
                                                              
                             @endif
 
-                            @if (Auth::user()->role_id == '3')
+                            @if (Auth::user()->role_id == '5')
+                            <li class="has-submenu">
+                                    
+                                <li class="has-submenu">
+                                    <a href="#"><i class="fas fa-exchange-alt"></i>Vault</a>
+                                    <ul class="submenu">
+                                        <li><a href="{{route('transaction')}}">All Transaction</a></li>
+                                        <li><a href="{{route('box')}}">Keep</a></li>
+                                        {{-- <li><a href="email-compose">XRF Operators</a></li>
+                                        <li><a href="email-compose">Invoice</a></li>
+                                        <li><a href="email-compose">Payment Approval</a></li>
+                                        <li><a href="email-compose">Vault Reqeust</a></li>
+                                        <li><a href="email-compose">Repot</a></li> --}}
+                                    </ul>
+                                </li>                                 
+                                                             
+                            @endif
+
+                            @if (Auth::user()->role_id == '6')
                            
                                 <li class="has-submenu">
                                     <a href="#"><i class="fas fa-exchange-alt"></i>Payment</a>
@@ -262,7 +280,7 @@
                                 
                             @endif
 
-                            @if (Auth::user()->role_id == '4')
+                            @if (Auth::user()->role_id == '7')
                             <li class="has-submenu">
                                     <a href="#"><i class="fas fa-truck"></i>Movement</a>
                                     <ul class="submenu">
@@ -277,9 +295,9 @@
                                 </li>                                                
                             @endif
 
-                            @if (Auth::user()->role_id == '5')
+                            @if (Auth::user()->role_id == '8')
                                 <li class="has-submenu">
-                                        <a href="#"><i class="fas fa-truck"></i>Movement</a>
+                                        <a href="#"><i class="fas fa-truck"></i>Processing</a>
                                         <ul class="submenu">
                                             {{-- <li><a href="email-inbox">Transfer Log </a></li>
                                             <li><a href="email-read">Logistics In</a></li>
@@ -292,11 +310,14 @@
                                     </li>                                
                             @endif
 
-                            @if (Auth::user()->role_id == '6')
+                            @if (Auth::user()->role_id == '9')
                                 
                             @endif
 
-                            @if (Auth::user()->role_id == '7')
+                            @if (Auth::user()->role_id == '10')
+                                
+                            @endif
+                            @if (Auth::user()->role_id == '11')
                                 
                             @endif
 

@@ -134,30 +134,9 @@
                                                 {{-- <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-delete"> <a style="color:beige;"><i class="fas fa-user-minus"></i></a></button>     --}}
                                                 
                                             </td>
-                                        </tr>                                    
-                                        @endforeach 
-                                        </tbody>
-                                </table>
-
-                                <div class="modal fade bs-example-modal-update" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title mt-0">Center modal</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                </div>
-                                                <div class="modal-body">
-                                                        <p>You are about to change the role status.</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('updateRole', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Continue</a></button>
-                                                        </div>
-                                            </div><!-- /.modal-content -->
-                                        </div><!-- /.modal-dialog -->
-                                    </div><!-- /.modal -->
-
-                                    <div class="modal fade bs-example-modal-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                        </tr>     
+                                        
+                                        <div class="modal fade bs-example-modal-update" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -165,16 +144,36 @@
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                     </div>
                                                     <div class="modal-body">
-                                                            <p>You are about to delete the role account.</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('deleteRole', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Delete</a></button>
-                                                        </div>
+                                                            <p>You are about to change the role status.</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('updateRole', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Continue</a></button>
+                                                            </div>
                                                 </div><!-- /.modal-content -->
                                             </div><!-- /.modal-dialog -->
                                         </div><!-- /.modal -->
-
+    
+                                        <div class="modal fade bs-example-modal-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title mt-0">Center modal</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                                <p>You are about to delete the role account.</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary waves-effect waves-light"><a style="color:beige;" href="{{ route('deleteRole', $d->id)}}"><i class="fas fa-user-alt-slash"></i>Delete</a></button>
+                                                            </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+                                        @endforeach 
+                                        </tbody>
+                                </table>
                             </div>
                         </div>
                     </div> <!-- end col -->

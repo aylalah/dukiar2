@@ -23,7 +23,7 @@
 
                                 <h4 class="mt-0 header-title">XRF Transaction</h4>
                                 <p class="text-muted m-b-30 font-14">ID: nkdlkncaionwenio320340848934rnirklfndf.</p>
-
+                               
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
@@ -34,7 +34,19 @@
                                     <tbody>
                                     <tr>
                                         <td style="color:brown; font-size:20px">Transaction Informations</td>
-                                        <td><span class="badge badge-pill badge-danger">{{$data[0]->status}}</span></td> 
+                                            @if ($data[0]->status == 'open')
+                                            <td><span class="badge badge-pill badge-danger">{{$data[0]->status}}</span></td>
+                                            @endif
+                                            @if ($data[0]->status == 'cost')
+                                            <td><span class="badge badge-pill badge-success">{{$data[0]->status}}</span></td> 
+                                            @endif
+                                            @if ($data[0]->status == 'checking')
+                                            <td><span class="badge badge-pill badge-warning">{{$data[0]->status}}</span></td> 
+                                            @endif
+                                            @if ($data[0]->status == 'confirmed')
+                                            <td><span class="badge badge-pill badge-primary">{{$data[0]->status}}</span></td> 
+                                            @endif
+                                         
                                     </tr>
                                     <tr>
                                             <td>User Barcode</td>
@@ -61,41 +73,88 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                            <td>GPS Location</td>
+                                            <td>
+                                                    <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> gps_location}}" />
+                                            </td>
+                                        </tr>
+                                    <tr>
                                         <td>User Gold weight</td>
                                         <td>
                                                 <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> user_weight}}" />
                                         </td>
                                     </tr>
                                     <tr>
+                                            <td>Transaction Date and Time</td>
+                                            <td>
+                                                    <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> created_at}}" />
+                                            </td>
+                                        </tr>
+
+                                    
+                                    <form class="" method="POST" action="/add-xrf">
+                                        {{ csrf_field() }}
+                                    <tr>
                                             <td style="color:darkgreen; font-size:20px">XRF Informations</td>
-                                            <td><span class="badge badge-pill badge-success">{{$data[0]->status}}</span></td>                                           
+                                            @if ($data[0]->status == 'open')
+                                                <td></td>
+                                            @else
+                                            <td><span class="badge badge-pill badge-success">Cost</span></td>
+                                            @endif
+                                                                                       
                                         </tr>
                                     <tr>
+                                        
                                         <td>XRF Value</td>
                                         <td>
-                                                <input type="text" class="form-control" required name="name" value="{{ $data[0] -> xrf_value}}" />
+                                            @if ($data[0]->status == 'open')
+                                                <input type="text" class="form-control" required name="xrfvalue" value="{{ $data[0] -> xrf_value}}" />
+                                                <input type="hidden" class="form-control" name="id" value="{{ $data[0] -> id}}" />
+                                            @else
+                                                <input type="text" disabled class="form-control" required name="xrfvalue" value="{{ $data[0] -> xrf_value}}" />
+                                                <input type="hidden" disabled class="form-control" name="id" value="{{ $data[0] -> id}}" />
+                                            @endif
+                                                
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Karate</td>
                                         <td>
-                                                <input type="text" class="form-control" required name="name" value="{{ $data[0] -> karate}}" />
+                                            @if ($data[0]->status == 'open')
+                                                <input type="text" class="form-control" required name="karate" value="{{ $data[0] -> karate}}" />
+                                            @else
+                                                <input type="text" disabled class="form-control" required name="karate" value="{{ $data[0] -> karate}}" />
+                                            @endif
+                                                
                                         </td>
                                     </tr>
                                     <tr>
                                             <td></td>
                                             <td>
-                                                    <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light"> <a href="" style="color:beige;"><i class="fas fa-user-edit"></i>Generate Price</a></button> 
+                                                @if ($data[0]->status == 'open')
+                                                    <button type="submit" class="btn btn-secondary btn-sm waves-effect waves-light"> <a style="color:beige;"><i class="fas fa-user-edit"></i>Generate Price</a></button> 
+                                                @else
+                                                    <button type="submit" disabled class="btn btn-secondary btn-sm waves-effect waves-light"> <a style="color:beige;"><i class="fas fa-user-edit"></i>Generate Price</a></button> 
+                                                @endif
+                                                    
                                             </td>
                                         </tr>
+                                    </form>
+
+
                                     <tr>
                                             <td style="color:darkblue; font-size:20px">Price Evaluation</td>
-                                            <td><span class="badge badge-pill badge-primary">{{$data[0]->status}}</span></td>  
+                                            @if ($data[0]->status == 'checking')
+                                            <td><span class="badge badge-pill badge-warning">Checking</span></td>
+                                            @else
+                                            <td></td>
+                                            @endif
+                                           
                                         </tr>
                                     <tr>
                                         <td>Cost Price</td>
                                         <td>
-                                                <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> price}}" />
+                                                <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> cost}}" />
                                         </td>
                                     </tr>
                                     <tr>
