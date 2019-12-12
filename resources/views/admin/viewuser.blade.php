@@ -11,7 +11,7 @@
                             <h4 class="page-title">Member Details</h4>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{url('admin/')}}">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="{{route('transaction')}}">Dukia Members</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('userLog')}}">Dukia Members</a></li>
                                 <li class="breadcrumb-item active">Member Details</li>
                             </ol>
 @endsection
@@ -79,6 +79,12 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                            <td>Gender </td>
+                                            <td>
+                                                    <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> gender}}"  />
+                                            </td>
+                                        </tr>
+                                    <tr>
                                         <td>Email</td>
                                         <td>
                                                 <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> email}}"  />
@@ -109,84 +115,84 @@
                                             </td>
                                         </tr>                                   
                                     
-                                    <form class="" method="POST" action="/add-xrf">
-                                        {{ csrf_field() }}
+                                    {{-- <form class="" method="POST" action="/add-xrf">
+                                        {{ csrf_field() }} --}}
                                     <tr>
-                                            <td style="color:darkgreen; font-size:20px">Business Information</td>
-                                            @if ($data[0]->status == 'open')
-                                                <td></td>
-                                            @else
-                                            <td><span class="badge badge-pill badge-success">Cost</span></td>
-                                            @endif
-                                                                                       
-                                        </tr>
+                                        <td style="color:darkgreen; font-size:20px">Business Information</td>  
+                                        <td></td>                                                                         
+                                    </tr>
+                                    
                                     <tr>
+                                        <td>Business Name</td>
+                                        <td>                                                        
+                                            <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> business_name}}" />                                                                      
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Business Address</td>
+                                        <td>                                                          
+                                            <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] ->business_address}}" />                                                                            
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>Date of Incorporation</td>
+                                        <td>             
+                                            <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> date_of_incorporation}}" />                                                                                                                          
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td>Business Phone Contact</td>
+                                    <td><input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> contact_phone}}" /></td>                                                                                                                         
                                         
-                                        <td>XRF Value</td>
-                                        <td>
-                                            @if ($data[0]->status == 'open')
-                                                <input type="text" class="form-control" required name="xrfvalue" value="{{ $data[0] -> xrf_value}}" />
-                                                <input type="hidden" class="form-control" name="id" value="{{ $data[0] -> id}}" />
-                                            @else
-                                                <input type="text" disabled class="form-control" required name="xrfvalue" value="{{ $data[0] -> xrf_value}}" />
-                                                <input type="hidden" disabled class="form-control" name="id" value="{{ $data[0] -> id}}" />
-                                            @endif
+                                    
+                                </tr>
+                                <tr>
+                                        <td>Contry of Incorporation</td>                                     
+                                        <td><input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> country_of_incorporation}}"/>  </td>                                 
+                                        
+                                </tr>
+                                <tr>
+                                        <td>Tax Number</td>                                  
+                                        <td><input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> tax_number}}"/></td>                               
+                                </tr>
+                                <tr>
+                                        <td>Licence</td>                                 
+                                        <td><input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> license}}" /></td>                                                                           
+                                            
+                                        
+                                </tr>
+                                <tr>
+                                        <td>Business Address</td>                                    
+                                        <td><input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> business_name}}" /></td>                                       
                                                 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Karate</td>
-                                        <td>
-                                            @if ($data[0]->status == 'open')
-                                                <input type="text" class="form-control" required name="karate" value="{{ $data[0] -> karate}}" />
-                                            @else
-                                                <input type="text" disabled class="form-control" required name="karate" value="{{ $data[0] -> karate}}" />
-                                            @endif
-                                                
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                            <td></td>
-                                            <td>
-                                                @if ($data[0]->status == 'open')
-                                                    <button type="submit" class="btn btn-secondary btn-sm waves-effect waves-light"> <a style="color:beige;"><i class="fas fa-user-edit"></i>Generate Price</a></button> 
-                                                @else
-                                                    <button type="submit" disabled class="btn btn-secondary btn-sm waves-effect waves-light"> <a style="color:beige;"><i class="fas fa-user-edit"></i>Generate Price</a></button> 
-                                                @endif
-                                                    
-                                            </td>
-                                        </tr>
-                                    </form>
+                                </tr>
+                                
 
 
                                     <tr>
-                                            <td style="color:darkblue; font-size:20px">Price Evaluation</td>
-                                            @if ($data[0]->status == 'checking')
-                                            <td><span class="badge badge-pill badge-warning">Checking</span></td>
-                                            @else
+                                            <td style="color:darkblue; font-size:20px">Bank Information</td>
                                             <td></td>
-                                            @endif
-                                           
+                                            
                                         </tr>
                                     <tr>
-                                        <td>Cost Price</td>
+                                        <td>Bank Name</td>
                                         <td>
-                                                <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> cost}}" />
+                                            <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> bank_name}}" />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Payer 1</td>
+                                        <td>Bank Account</td>
                                         <td>
-                                            <span class="badge badge-pill badge-primary">{{$data[0]->payer1_status}}</span>  
+                                                <input type="text" disabled class="form-control" required name="name" value="{{ $data[0] -> bank_account}}" />  
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Payer 2</td>
+                                        <td>Wallet</td>
                                         <td>
-                                            <span class="badge badge-pill badge-primary">{{$data[0]->payer2_status}}</span>
+                                            <span class="badge badge-pill badge-primary">{{$data[0]-> wallet}}</span>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <td>Payer 3</td>
                                         <td>
                                             <span class="badge badge-pill badge-primary">{{$data[0]->payer3_status}}</span>
@@ -201,11 +207,11 @@
                                     <tr>
                                         <td></td>
                                         <td></td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                             <td style="color:darkblue; font-size:20px"></td>
                                             <td>
-                                                    <button type="button" class="btn btn-info btn-sm waves-effect waves-light"> <a href="{{route('transaction')}}" style="color:beige;">Cloce Transaction</a></button> 
+                                                    <button type="button" class="btn btn-info btn-sm waves-effect waves-light"> <a href="" style="color:beige;">Update</a></button> 
                                             </td>
                                     </tr>
 
