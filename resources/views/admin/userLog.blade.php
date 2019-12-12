@@ -118,7 +118,7 @@
                                        <td><span class="badge badge-pill badge-danger">{{$d->status}}</span></td>
                                        @endif
                                         <td>
-                                                <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-update-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-eye"></i></a></button>
+                                            <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light"> <a href="{{ route('viewUser', $d->id)}}" style="color:beige;"><i class="fas fa-eye"></i></a></button>
                                             <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-update-{{$d->id}}"> <a style="color:beige;"><i class="fas fa-user-alt-slash"></i></a></button>
                                             <button type="button" class="btn btn-secondary btn-sm waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-delete-{{$d->id}}"> <a style="color:beige;" ><i class="fas fa-user-minus"></i></a></button>    
                                            

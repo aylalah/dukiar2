@@ -35,6 +35,7 @@ Auth::routes();
 
     //Users
     Route::resource('/userLog', 'admin\userLogController@index');
+    Route::get('/view-User/{id}', 'admin\userLogController@show')->name('viewUser');
     Route::get('/edit-User/{id}', 'admin\userLogController@update')->name('updateUser');
     Route::get('/delete-User/{id}', 'admin\userLogController@destroy')->name('deleteUser');
     

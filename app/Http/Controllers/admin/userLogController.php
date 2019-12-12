@@ -96,7 +96,17 @@ class userLogController extends Controller
      */
     public function show($id)
     {
-        //
+        $alluser = User::count();
+        $actuser = User::where('status','=','active')->count();
+        $sususer = User::where('status','=','suspended')->count();
+        $newuser = User::where('status','=','new')->count();
+
+        $user = new User;
+        $users = $user::orderBy('id')
+                                     ->select('users.*')
+                                     ->where('users.id', '=', $id)
+                                    ->paginate();
+                                    return view('admin.viewuser', ['data'=> $users, 'count1'=> $alluser, 'count2'=> $actuser, 'count3'=> $sususer, 'count4'=> $newuser]);
     }
 
     /**
