@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\User;
 
 class userLogController extends Controller
@@ -53,13 +54,19 @@ class userLogController extends Controller
             // break;
         }
 
+        $alluser = User::count();
+        $actuser = User::where('status','=','active')->count();
+        $sususer = User::where('status','=','suspended')->count();
+        $newuser = User::where('status','=','new')->count();
+
         $user = new User;
         $users = $user::orderBy('id')
                                      ->select('users.*')
                                     ->paginate();
-                                     return view('admin.userLog')->with('data', $users);
+                                    return view('admin.userLog', ['data'=> $users, 'count1'=> $alluser, 'count2'=> $actuser, 'count3'=> $sususer, 'count4'=> $newuser]);
+                                     
     }
-
+  
     /**
      * Show the form for creating a new resource.
      *
